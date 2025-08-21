@@ -8,16 +8,23 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  let humanChoice = prompt("Enter rock, paper, or scissors:").toString().toLowerCase();
-  return humanChoice;
+  let input = prompt("Enter rock, paper, or scissors:");
+  let humanChoice = input ? input.toString().toLowerCase() : 'cancelled';
 
+  if (humanChoice === 'cancelled') {
+    playAgain = false;
+    return;
+  }
+  return humanChoice;
 }
 
 function playRound() {
   const computerChoice = getComputerChoice();
   const humanChoice = getHumanChoice();
-
-  if (computerChoice === humanChoice) {
+if (!humanChoice) {
+    return "Game cancelled.";
+  }
+  else if (computerChoice === humanChoice) {
     score.human += 1;
     score.computer += 1;
     return "It's a tie!";
